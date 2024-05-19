@@ -1,6 +1,16 @@
 import Image from "next/image";
-
-export default function Home() {
+import { cookies } from 'next/headers'
+export default async function Home() {
+  const cookieStore = await cookies()
+  const theme = await cookieStore.get('token')
+console.log("theme",theme?.value)
+const res = await fetch("https://tracev2.barikoimaps.dev/auth/user", {  method: "GET",  headers: {    
+  "Content-Type": "application/json",    
+  "Accept": "application/json",
+  "Authorization": `Bearer ${theme?.value}`
+ }})
+const data = await res.json()
+// console.log(data)
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">

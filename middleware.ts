@@ -2,9 +2,8 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import checkAuthentication from "./hooks/checkAuthentication";
 
-
 // 1. Specify protected and public routes
-const protectedRoutes = ["/dashboard","/"];
+const protectedRoutes = ["/dashboard", "/","/user"];
 const publicRoutes = ["/login", "/signup"];
 
 export default async function middleware(req: NextRequest) {
@@ -14,7 +13,7 @@ export default async function middleware(req: NextRequest) {
   const isPublicRoute = publicRoutes.includes(path);
 
   // 3. Decrypt the session from the cookie
-  const cookie = cookies().get('token')?.value
+  const cookie = cookies().get("token")?.value;
   const session = await checkAuthentication(cookie);
 
   // 5. Redirect to /login if the user is not authenticated

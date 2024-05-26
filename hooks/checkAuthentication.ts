@@ -1,3 +1,5 @@
+import { cookies } from "next/headers";
+
 async function checkAuthentication(token: any) {
   try {
     const response = await fetch("https://tracev2.barikoimaps.dev/auth/user", {
@@ -11,10 +13,11 @@ async function checkAuthentication(token: any) {
     });
     const data = await response.json();
 
-    console.log("data,token", data, token);
+    // console.log("data,token", data, token);
+    // cookies().set("user", data);
     if (response.ok) {
       // User is authenticated
-      return true;
+      return data;
     } else {
       // User is not authenticated
       return false;

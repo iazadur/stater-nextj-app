@@ -4,7 +4,7 @@ import checkAuthentication from "./hooks/checkAuthentication";
 
 // 1. Specify protected and public routes
 const protectedRoutes = ["/dashboard", "/","/user"];
-const publicRoutes = ["/login", "/signup"];
+const publicRoutes = ["/sign-in", "/sign-up"];
 
 export default async function middleware(req: NextRequest) {
   // 2. Check if the current route is protected or public
@@ -18,7 +18,7 @@ export default async function middleware(req: NextRequest) {
 
   // 5. Redirect to /login if the user is not authenticated
   if (isProtectedRoute && !session) {
-    return NextResponse.redirect(new URL("/login", req.nextUrl));
+    return NextResponse.redirect(new URL("/sign-in", req.nextUrl));
   }
 
   // 6. Redirect to /dashboard if the user is authenticated

@@ -2,6 +2,7 @@ import LogoutButton from "@/components/LogoutButton";
 import checkAuthentication from "@/hooks/checkAuthentication";
 // import { logout } from "@/hooks/auth";
 import { cookies } from "next/headers";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -23,6 +24,7 @@ const Dashboard = async () => {
           <LogoutButton />
         </form>
       </div>
+      <Link href="/map">map</Link>
     </div>
   );
 };
